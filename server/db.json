@@ -1,0 +1,68 @@
+{
+  "admins": [
+    {
+      "id": "admin_001",
+      "email": "amelia@admin.com",
+      "password": "$2a$10$XkK7zGZLZqZqZqZqZqZqZuO7Y7Y7Y7Y7Y7Y7Y7Y7Y7Y7Y7Y7Y7Y7Y",
+      "name": "Amelia"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat_001",
+      "name": "Watercolor Paintings",
+      "slug": "watercolor-paintings",
+      "createdAt": "2024-01-15T10:00:00.000Z"
+    },
+    {
+      "id": "cat_002",
+      "name": "Oil on Canvas",
+      "slug": "oil-on-canvas",
+      "createdAt": "2024-01-15T10:05:00.000Z"
+    }
+  ],
+  "artworks": [
+    {
+      "id": "art_001",
+      "title": "Cherry Blossom Dreams",
+      "description": "A delicate watercolor depicting spring cherry blossoms in full bloom, capturing the ethereal beauty of nature's awakening.",
+      "price": 450,
+      "imageUrl": "/assets/images/blossom-bg.png",
+      "categoryId": "cat_001",
+      "availability": "available",
+      "createdAt": "2024-01-20T09:00:00.000Z"
+    },
+    {
+      "id": "art_002",
+      "title": "Sunset Serenity",
+      "description": "An oil painting capturing the warm glow of sunset over tranquil waters, evoking peace and contemplation.",
+      "price": 680,
+      "imageUrl": "/assets/images/blossom-bg.png",
+      "categoryId": "cat_002",
+      "availability": "available",
+      "createdAt": "2024-01-22T14:30:00.000Z"
+    },
+    {
+      "id": "art_003",
+      "title": "Morning Mist",
+      "description": "A soft watercolor portrayal of morning fog rolling through mountain valleys, creating an atmosphere of quiet mystery.",
+      "price": 520,
+      "imageUrl": "/assets/images/blossom-bg.png",
+      "categoryId": "cat_001",
+      "availability": "available",
+      "createdAt": "2024-01-25T11:15:00.000Z"
+    }
+  ],
+  "messages": [
+    {
+      "id": "msg_1772556074730_wa4grpp66",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "subject": "Inquiry about artwork",
+      "message": "I am interested in purchasing one of your paintings.",
+      "read": false,
+      "createdAt": "2026-03-03T16:41:14.730Z"
+    }
+  ],
+  "orders": []
+}

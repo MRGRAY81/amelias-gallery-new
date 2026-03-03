@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Amelia's Gallery</title>
+  <script src="/js/config.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: linear-gradient(135deg, #fff5f7 0%, #ffe4e1 100%);
+      min-height: 100vh;
+    }
+    
+    .admin-header {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1.5rem 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .admin-header h1 {
+      font-size: 1.8rem;
+      color: #2a2a2a;
+    }
+    
+    .admin-header .user-info {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    
+    .btn {
+      padding: 0.6rem 1.5rem;
+      background: rgba(212, 165, 165, 0.8);
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: Georgia, 'Times New Roman', serif;
+      transition: background 0.3s ease;
+    }
+    
+    .btn:hover {
+      background: rgba(196, 144, 144, 0.9);
+    }
+    
+    .btn-secondary {
+      background: rgba(150, 150, 150, 0.6);
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(120, 120, 120, 0.7);
+    }
+    
+    .btn-danger {
+      background: rgba(200, 100, 100, 0.8);
+    }
+    
+    .btn-danger:hover {
+      background: rgba(180, 80, 80, 0.9);
+    }
+    
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+    
+    .tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .tab {
+      padding: 0.8rem 1.5rem;
+      background: rgba(255, 255, 255, 0.7);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .tab.active {
+      background: rgba(212, 165, 165, 0.9);
+      color: #fff;
+    }
+    
+    .tab-content {
+      display: none;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .section-header h2 {
+      color: #2a2a2a;
+      font-size: 1.5rem;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+    }
+    
+    table th,
+    table td {
+      padding: 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(212, 165, 165, 0.2);
+    }
+    
+    table th {
+      background: rgba(212, 165, 165, 0.1);
+      font-weight: 600;
+      color: #3a3a3a;
+    }
+    
+    table tr:hover {
+      background: rgba(212, 165, 165, 0.05);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #3a3a3a;
+      font-weight: 500;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid rgba(212, 165, 165, 0.3);
+      border-radius: 6px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1rem;
+    }
+    
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal.active {
+      display: flex;
+    }
+    
+    .modal-content {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .modal-header h3 {
+      color: #2a2a2a;
+      font-size: 1.5rem;
+    }
+    
+    .close-modal {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #6a6a6a;
+    }
+    
+    .badge {
+      padding: 0.3rem 0.8rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    
+    .badge-unread {
+      background: rgba(200, 100, 100, 0.2);
+      color: #c86464;
+    }
+    
+    .badge-read {
+      background: rgba(100, 150, 100, 0.2);
+      color: #648c64;
+    }
+    
+    .badge-pending {
+      background: rgba(200, 150, 100, 0.2);
+      color: #c89664;
+    }
+    
+    .badge-paid {
+      background: rgba(100, 150, 200, 0.2);
+      color: #6496c8;
+    }
+    
+    .badge-shipped {
+      background: rgba(100, 200, 150, 0.2);
+      color: #64c896;
+    }
+    
+    .badge-cancelled {
+      background: rgba(150, 150, 150, 0.2);
+      color: #969696;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .btn-small {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+    }
+    
+    .alert {
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+    
+    .alert-success {
+      background: rgba(100, 200, 150, 0.2);
+      color: #2d5a2d;
+      border: 1px solid rgba(100, 200, 150, 0.4);
+    }
+    
+    .alert-error {
+      background: rgba(200, 100, 100, 0.2);
+      color: #5a2d2d;
+      border: 1px solid rgba(200, 100, 100, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-header">
+    <h1 data-testid="admin-dashboard-title">Admin Dashboard</h1>
+    <div class="user-info">
+      <span id="adminName" data-testid="admin-user-name"></span>
+      <button class="btn btn-secondary" onclick="logout()" data-testid="admin-logout-btn">Logout</button>
+    </div>
+  </div>
+
+  <div class="dashboard-container">
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('messages')" data-testid="tab-messages">Messages</button>
+      <button class="tab" onclick="switchTab('orders')" data-testid="tab-orders">Orders</button>
+      <button class="tab" onclick="switchTab('artworks')" data-testid="tab-artworks">Artworks</button>
+      <button class="tab" onclick="switchTab('categories')" data-testid="tab-categories">Categories</button>
+    </div>
+
+    <!-- Messages Tab -->
+    <div id="messages-tab" class="tab-content active">
+      <div class="section-header">
+        <h2>Messages</h2>
+      </div>
+      <div id="messagesContainer" data-testid="messages-container"></div>
+    </div>
+
+    <!-- Orders Tab -->
+    <div id="orders-tab" class="tab-content">
+      <div class="section-header">
+        <h2>Orders</h2>
+      </div>
+      <div id="ordersContainer" data-testid="orders-container"></div>
+    </div>
+
+    <!-- Artworks Tab -->
+    <div id="artworks-tab" class="tab-content">
+      <div class="section-header">
+        <h2>Artworks</h2>
+        <button class="btn" onclick="openArtworkModal()" data-testid="create-artwork-btn">Create Artwork</button>
+      </div>
+      <div id="artworksContainer" data-testid="artworks-container"></div>
+    </div>
+
+    <!-- Categories Tab -->
+    <div id="categories-tab" class="tab-content">
+      <div class="section-header">
+        <h2>Categories</h2>
+        <button class="btn" onclick="openCategoryModal()" data-testid="create-category-btn">Create Category</button>
+      </div>
+      <div id="categoriesContainer" data-testid="categories-container"></div>
+    </div>
+  </div>
+
+  <!-- Artwork Modal -->
+  <div id="artworkModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="artworkModalTitle">Create Artwork</h3>
+        <button class="close-modal" onclick="closeArtworkModal()">&times;</button>
+      </div>
+      <div id="artworkAlertContainer"></div>
+      <form id="artworkForm" data-testid="artwork-form">
+        <input type="hidden" id="artworkId">
+        <div class="form-group">
+          <label for="artworkTitle">Title</label>
+          <input type="text" id="artworkTitle" required data-testid="artwork-title-input">
+        </div>
+        <div class="form-group">
+          <label for="artworkDescription">Description</label>
+          <textarea id="artworkDescription" required data-testid="artwork-description-input"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="artworkPrice">Price ($)</label>
+          <input type="number" id="artworkPrice" required data-testid="artwork-price-input">
+        </div>
+        <div class="form-group">
+          <label for="artworkImageUrl">Image URL</label>
+          <input type="text" id="artworkImageUrl" required data-testid="artwork-image-url-input">
+        </div>
+        <div class="form-group">
+          <label for="artworkCategory">Category</label>
+          <select id="artworkCategory" required data-testid="artwork-category-select"></select>
+        </div>
+        <div class="form-group">
+          <label for="artworkAvailability">Availability</label>
+          <select id="artworkAvailability" required data-testid="artwork-availability-select">
+            <option value="available">Available</option>
+            <option value="sold">Sold</option>
+            <option value="reserved">Reserved</option>
+          </select>
+        </div>
+        <button type="submit" class="btn" data-testid="artwork-submit-btn">Save Artwork</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Category Modal -->
+  <div id="categoryModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="categoryModalTitle">Create Category</h3>
+        <button class="close-modal" onclick="closeCategoryModal()">&times;</button>
+      </div>
+      <div id="categoryAlertContainer"></div>
+      <form id="categoryForm" data-testid="category-form">
+        <input type="hidden" id="categoryId">
+        <div class="form-group">
+          <label for="categoryName">Name</label>
+          <input type="text" id="categoryName" required data-testid="category-name-input">
+        </div>
+        <div class="form-group">
+          <label for="categorySlug">Slug</label>
+          <input type="text" id="categorySlug" required data-testid="category-slug-input">
+        </div>
+        <button type="submit" class="btn" data-testid="category-submit-btn">Save Category</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Amelia's Gallery</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/gallery.css">
+  <script src="/js/config.js"></script>
+</head>
+<body>
+  <div class="page-wrapper" style="background-image: url('/assets/images/blossom-bg.png');">
+    <header>
+      <h1 class="site-title">Amelia's Gallery</h1>
+      <nav>
+        <a href="/index.html" data-testid="nav-home">Home</a>
+        <a href="/gallery.html" data-testid="nav-gallery">Gallery</a>
+        <a href="/about.html" data-testid="nav-about">About</a>
+        <a href="/contact.html" data-testid="nav-contact">Contact (For inquiries/Commissions)</a>
+      </nav>
+      <a href="/admin/login.html" class="admin-secret-hotspot" data-testid="admin-secret-hotspot" aria-label="Admin access"></a>
+    </header>
+
+    <main>
+      <section id="galleryCarouselMount" data-testid="gallery-carousel-mount"></section>
+    </main>
+  </div>
+
+  <script src="/js/gallery.js"></script>
+  <script>
+    let keyBuffer = '';
+    let keyTimer;
+
+    document.addEventListener('keypress', (e) => {
+      clearTimeout(keyTimer);
+      keyBuffer += e.key.toLowerCase();
+      
+      if (keyBuffer.includes('amelia')) {
+        window.location.href = '/admin/login.html';
+      }
+      
+      keyTimer = setTimeout(() => {
+        keyBuffer = '';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
