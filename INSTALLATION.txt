@@ -1,0 +1,80 @@
+# AMELIA'S GALLERY - INSTALLATION INSTRUCTIONS
+
+## 📦 Package Contents
+- server/          → Node.js + Express backend
+- public/          → HTML/CSS/JS frontend  
+- README.md        → Full documentation
+- PROJECT_SUMMARY.md → Complete feature list
+- QUICK_REFERENCE.md → Quick access guide
+- start-server.sh  → Startup script
+
+## 🚀 Quick Start (3 Steps)
+
+### Step 1: Extract the ZIP
+Unzip amelias-gallery.zip to your desired location
+
+### Step 2: Install Dependencies
+```bash
+cd server
+npm install
+```
+
+### Step 3: Start the Server
+```bash
+node index.js
+```
+
+Server will run on: http://localhost:4000
+
+## 🌐 Access the Website
+- Home: http://localhost:4000/
+- Gallery: http://localhost:4000/gallery.html
+- About: http://localhost:4000/about.html
+- Contact: http://localhost:4000/contact.html
+- Admin: http://localhost:4000/admin/login.html
+
+## 🔐 Admin Credentials
+Email: amelia@admin.com
+Password: AmeliaSecure123
+
+## 🎯 Secret Admin Access
+1. Click invisible hotspot (bottom-right of header)
+2. Type "AMELIA" anywhere on the site
+
+## 📝 Important Notes
+- This is a Multi-Page Application (MPA) with standard HTML files
+- NO React, NO SPA routing - just pure HTML/CSS/JS
+- Backend uses Node.js + Express
+- Database is a simple JSON file (server/db.json)
+- Port 4000 is configurable via process.env.PORT
+
+## 🎨 Gallery Carousel Integration
+To add your custom moving-rows carousel:
+1. Open: public/js/gallery.js
+2. Find: // PASTE EXISTING MOVING-ROWS CAROUSEL CODE HERE
+3. Replace the fallback code with your carousel
+4. The artworks array is already loaded!
+
+## 🔧 Replit Deployment
+This project is Replit-ready:
+1. Upload the zip to Replit
+2. Extract files
+3. Run: cd server && npm install && node index.js
+4. Your site will be live!
+
+## 📦 Sample Data Included
+✅ 3 artworks (Cherry Blossom Dreams, Sunset Serenity, Morning Mist)
+✅ 2 categories (Watercolor Paintings, Oil on Canvas)
+✅ 1 admin user (Amelia)
+✅ 1 test message (from contact form)
+
+## ⚡ Tech Stack
+- Frontend: Pure HTML, CSS, JavaScript
+- Backend: Node.js 20+ + Express
+- Database: JSON file (db.json)
+- Auth: JWT tokens + bcryptjs
+
+## 🎉 That's It!
+Your gallery is ready to run. Just install dependencies and start the server!
+
+For questions, check README.md for detailed documentation.
