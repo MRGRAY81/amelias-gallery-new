@@ -12,7 +12,7 @@ const DB_PATH = path.join(__dirname, 'db.json');
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 function readDB() {
   const data = fs.readFileSync(DB_PATH, 'utf8');
@@ -273,8 +273,11 @@ app.delete('/api/artworks/:id', authMiddleware, (req, res) => {
   }
 });
 
+// Catch-all route should only handle non-API, non-static routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+  // If the file exists, express.static already served it
+  // This is just for client-side routing fallback (not needed for MPA)
+  res.status(404).send('Page not found');
 });
 
 app.listen(PORT, '0.0.0.0', () => {

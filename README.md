@@ -1,151 +1,214 @@
-# Amelia's Gallery
+# 🎨 Amelia's Gallery
 
-A beautiful, family-run art gallery website featuring a soft, minimal, artistic design with a blossom-themed aesthetic.
+A beautiful family-run art gallery website with soft, minimal, artistic design featuring a stunning blossom-themed background.
 
-## Features
+## ⚡ Quick Start
+
+### Run Locally
+```bash
+npm install
+npm start
+```
+Open http://localhost:3000
+
+### Run on Replit
+
+#### Method 1: Import from GitHub (Recommended)
+1. Push this repository to GitHub
+2. Go to [Replit.com](https://replit.com)
+3. Click **"Create Repl"** → **"Import from GitHub"**
+4. Select your repository
+5. Click **"Import from GitHub"**
+6. Replit will automatically install dependencies and run the server
+7. Your gallery will be live at your Repl URL!
+
+#### Method 2: Manual Upload
+1. Create a new Node.js Repl on Replit
+2. Upload all files to the Repl
+3. Click the **"Run"** button
+4. Replit will handle the rest!
+
+#### What Replit Does Automatically:
+- ✅ Detects Node.js project via `package.json`
+- ✅ Runs `npm install` to install dependencies
+- ✅ Executes `node index.js` to start server
+- ✅ Provides a live URL (e.g., `https://amelias-gallery.username.repl.co`)
+- ✅ Maps port 3000 to public URL
+
+## 🔐 Admin Access
+
+**Login URL:** `/admin/login.html`
+
+**Credentials:**
+- Email: `amelia@admin.com`
+- Password: `AmeliaSecure123`
+
+**Secret Access:**
+- Click invisible hotspot in bottom-right of header
+- Type "AMELIA" anywhere on the site
+
+## 📁 Project Structure
+
+```
+amelias-gallery/
+├── index.js              # Express server (ENTRY POINT)
+├── package.json          # Dependencies
+├── db.json              # Database
+├── public/              # Frontend files
+│   ├── *.html          # Pages (home, gallery, about, contact)
+│   ├── admin/          # Admin pages
+│   ├── css/            # Stylesheets
+│   ├── js/             # JavaScript
+│   └── assets/         # Images
+├── .replit             # Replit config
+└── replit.nix          # Nix dependencies
+```
+
+## 🎯 Features
 
 ### Public Website
-- **Home Page**: Welcome panel with gallery introduction
-- **Gallery Page**: Artwork showcase with carousel (placeholder for existing moving-rows carousel)
-- **About Page**: Gallery story and background
-- **Contact Page**: Inquiry and commission request form
+- **Home** - Welcome page with blossom background
+- **Gallery** - Artwork showcase (3 sample artworks included)
+- **About** - Gallery story
+- **Contact** - Inquiry form with backend submission
 
-### Admin Backoffice
-- **Secret Access**: Hidden hotspot in header + keyboard shortcut (type "AMELIA")
-- **Messages Management**: View, mark as read/unread, delete inquiries
-- **Orders Management**: Update order status (pending/paid/shipped/cancelled)
-- **Artwork Management**: Create, edit, delete artworks with images and pricing
-- **Category Management**: Organize artworks by categories
+### Admin Dashboard
+- **Messages** - View/manage contact inquiries
+- **Orders** - Track order status
+- **Artworks** - Create, edit, delete gallery items
+- **Categories** - Organize artworks
 
-## Project Structure
+## 🔧 Tech Stack
+- **Frontend**: Pure HTML, CSS, JavaScript (No React!)
+- **Backend**: Node.js + Express
+- **Database**: JSON file (`db.json`)
+- **Auth**: JWT tokens
+- **Port**: 3000 (configurable)
 
-```
-/app/
-├── server/                 # Node.js + Express backend
-│   ├── index.js           # Main server file
-│   ├── db.json            # JSON file database
-│   └── package.json       # Node dependencies
-├── public/                # Static frontend files
-│   ├── index.html         # Home page
-│   ├── gallery.html       # Gallery page
-│   ├── about.html         # About page
-│   ├── contact.html       # Contact page
-│   ├── admin/
-│   │   ├── login.html     # Admin login
-│   │   └── index.html     # Admin dashboard
-│   ├── css/
-│   │   ├── main.css       # Global styles
-│   │   └── gallery.css    # Gallery-specific styles
-│   ├── js/
-│   │   ├── config.js      # Backend URL configuration
-│   │   ├── gallery.js     # Gallery logic
-│   │   └── admin.js       # Admin dashboard logic
-│   └── assets/
-│       └── images/
-│           └── blossom-bg.png  # Background artwork
-└── README.md
-```
+## 🌐 API Endpoints
 
-## Running on Replit
-
-### Setup Instructions
-
-1. **Install Dependencies**
-   ```bash
-   cd server
-   npm install
-   ```
-
-2. **Start the Server**
-   ```bash
-   npm start
-   ```
-
-3. **Access the Website**
-   - The server runs on port 3000 (or process.env.PORT on Replit)
-   - Open your Replit preview to view the site
-   - Navigate to `/admin/login.html` for admin access
-
-### Admin Credentials
-
-- **Email**: amelia@admin.com
-- **Password**: AmeliaSecure123
-
-### Secret Admin Access
-
-Two ways to access the admin panel:
-1. Click the invisible hotspot in the bottom-right corner of the header
-2. Type "AMELIA" (case-insensitive) anywhere on the site
-
-## API Endpoints
-
-### Public Endpoints
+### Public
 - `GET /api/health` - Health check
-- `GET /api/artworks` - Get all artworks
-- `GET /api/categories` - Get all categories
-- `POST /api/messages` - Submit contact message
-- `POST /api/orders` - Create order (scaffold)
+- `GET /api/artworks` - List artworks
+- `GET /api/categories` - List categories
+- `POST /api/messages` - Submit contact form
 
-### Protected Endpoints (require JWT token)
+### Protected (JWT required)
 - `POST /api/auth/login` - Admin login
-- `GET /api/messages` - Get all messages
-- `PATCH /api/messages/:id` - Update message
-- `DELETE /api/messages/:id` - Delete message
-- `GET /api/orders` - Get all orders
-- `PATCH /api/orders/:id` - Update order status
-- `POST /api/artworks` - Create artwork
-- `PATCH /api/artworks/:id` - Update artwork
-- `DELETE /api/artworks/:id` - Delete artwork
-- `POST /api/categories` - Create category
-- `PATCH /api/categories/:id` - Update category
-- `DELETE /api/categories/:id` - Delete category
+- Full CRUD for messages, orders, artworks, categories
 
-## Database
+## 📝 Configuration
 
-The application uses a JSON file (`server/db.json`) for data persistence with the following collections:
-- `admins` - Admin users
-- `categories` - Artwork categories
-- `artworks` - Gallery artworks
-- `messages` - Contact form submissions
-- `orders` - Customer orders
+### Environment Variables (Optional)
+```bash
+PORT=3000                  # Server port
+JWT_SECRET=your-secret     # JWT signing key
+```
 
-## Design Guidelines
+### Replit Configuration
+The `.replit` file tells Replit how to run the project:
+```toml
+run = "npm install && node index.js"
+entrypoint = "index.js"
+language = "nodejs"
+```
 
+## 🎨 Design
 - Soft, minimal, artistic aesthetic
 - Serif typography (Georgia)
-- Gentle hover effects and transitions
-- Light translucent panels over artwork background
-- No heavy UI or visible box frames
-- Calm, artistic color palette (soft pinks, roses, neutrals)
+- Translucent panels with backdrop blur
+- Gentle hover effects
+- Full-page blossom artwork background
+- Responsive layout
 
-## Gallery Carousel
-
-The gallery page includes a placeholder section (`#galleryCarouselMount`) for your existing moving-rows carousel code. To integrate your carousel:
-
-1. Open `/public/js/gallery.js`
-2. Find the comment: `// PASTE EXISTING MOVING-ROWS CAROUSEL CODE HERE (UNCHANGED)`
-3. Replace the fallback grid code with your carousel implementation
-4. The `artworks` array is already loaded from the backend
-
-## Technologies Used
-
-- **Frontend**: Pure HTML, CSS, JavaScript (no frameworks)
-- **Backend**: Node.js + Express
-- **Database**: JSON file storage
-- **Authentication**: JWT tokens
-- **Deployment**: Replit-ready with process.env.PORT support
-
-## Sample Data
-
-The application comes pre-populated with:
+## 📦 Sample Data
+Includes pre-populated data for testing:
+- 3 artworks with descriptions and pricing
 - 2 categories (Watercolor Paintings, Oil on Canvas)
-- 3 sample artworks with descriptions and pricing
 - 1 admin user (Amelia)
 
-## Notes
+## 🚀 Deployment
 
-- All pages use standard anchor links (not SPA routing)
-- Background image is the uploaded blossom artwork
-- Admin dashboard is fully functional with CRUD operations
-- Contact form submits to backend API
-- Token-based authentication for admin access
+### Replit (Zero Configuration)
+1. Import from GitHub or upload files
+2. Click "Run"
+3. Done! Your gallery is live
+
+### Other Platforms
+- **Heroku**: Add `Procfile` with `web: node index.js`
+- **Railway**: Automatically detects and deploys
+- **Render**: Automatically detects and deploys
+- **DigitalOcean App Platform**: Select Node.js runtime
+
+## 🎯 Gallery Carousel Integration
+To add custom moving-rows carousel:
+1. Open `public/js/gallery.js`
+2. Find comment: `// PASTE EXISTING MOVING-ROWS CAROUSEL CODE HERE`
+3. Replace fallback grid with your carousel code
+4. The `artworks` array is already loaded from backend
+
+## 📚 Documentation
+- **RELEASE_NOTES.md** - Full technical documentation
+- **INSTALLATION.txt** - Quick setup guide
+- **PROJECT_SUMMARY.md** - Feature overview
+- **REPLIT_DEPLOY.md** - Replit deployment guide
+
+## 🔒 Security
+- JWT-based authentication
+- bcrypt password hashing
+- CORS enabled
+- Environment variables for secrets
+
+**Production Recommendations:**
+- Change `JWT_SECRET` 
+- Use HTTPS
+- Add rate limiting
+- Restrict database file permissions
+
+## 🐛 Troubleshooting
+
+**Port in use:**
+```bash
+PORT=4000 node index.js
+```
+
+**Dependencies fail:**
+```bash
+rm -rf node_modules
+npm install
+```
+
+**Pages not loading:**
+- Ensure server started: Look for "Amelia's Gallery server running on port 3000"
+- Check db.json exists
+- Verify Node.js version ≥18
+
+## 📖 Scripts
+
+```bash
+npm start      # Start server (production)
+npm run dev    # Start server (development, same as start)
+npm test       # Run tests (currently placeholder)
+```
+
+## ✨ Key Features
+✅ Multi-page application (MPA, not SPA)
+✅ No build step required
+✅ Replit-ready with automatic deployment
+✅ Beautiful artistic design
+✅ Secret admin access
+✅ Full CRUD admin dashboard
+✅ JWT authentication
+✅ JSON file database
+✅ Sample data included
+
+## 📄 License
+ISC
+
+## 🙏 Credits
+Background artwork: Cherry blossom themed illustration
+Created for Amelia's Gallery
+
+---
+
+**Ready to deploy?** Push to GitHub and import to Replit in under 2 minutes! 🚀

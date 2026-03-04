@@ -1,9 +1,11 @@
 node_modules
 .npm
 *.log
+.git
+.cache
 __pycache__
 *.pyc
-backend
-frontend
-tests
-.git
+.env.local
+.env.*.local
+*.zip
+*.tar.gz

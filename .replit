@@ -1,13 +1,16 @@
-run = "cd server && npm install && node index.js"
-entrypoint = "server/index.js"
+run = "npm install && node index.js"
+entrypoint = "index.js"
 language = "nodejs"
 
 [nix]
 channel = "stable-22_11"
 
 [deployment]
-run = ["sh", "-c", "cd server && npm install && node index.js"]
+run = ["sh", "-c", "npm install && node index.js"]
 deploymentTarget = "cloudrun"
 
 [env]
 PORT = "3000"
+
+[unitTest]
+language = "nodejs"
